@@ -20,7 +20,8 @@ app.get('/search', (req, res) => {
   const restaurants = restaurantList.results.filter(restaurant => {
     return (restaurant.name + restaurant.category).toLowerCase().includes(keyword.toLowerCase())
   })
-  res.render('index', { restaurants, keyword })
+  // check if results found
+  restaurants.length ? res.render('index', { restaurants, keyword }) : res.render('error', { keyword })
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
