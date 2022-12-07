@@ -30,6 +30,13 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
   res.render('show', { restaurant: restaurant })
 })
 
+app.get('/restaurants/explore/:restaurant_category', (req, res) => {
+  const restaurants = restaurantList.results.filter(restaurant => {
+    return restaurant.category.toString() === req.params.restaurant_category
+  })
+  res.render('index', { restaurants: restaurants })
+})
+
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
 })
