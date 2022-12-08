@@ -38,7 +38,7 @@ app.get('/restaurants/explore/:restaurant_category', (req, res) => {
   const restaurants = restaurantList.filter(restaurant => {
     return restaurant.category.toString() === req.params.restaurant_category
   })
-  res.render('index', { restaurants })
+  res.render('index', { restaurants, keyword: req.params.restaurant_category })
 })
 
 app.listen(port, () => {
