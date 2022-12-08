@@ -23,7 +23,7 @@
 
 使用者可以透過搜尋**餐廳名稱**或是**餐廳類別**來找到特定的餐廳
 除了手動搜尋外，也在搜尋框中，可以使用下拉式選單選取餐廳
-![Dropdown list in search bar](./public/image/search_dropdown_list)
+![Dropdown list in search bar](./public/image/search_dropdown_list.png)
 
 在餐廳詳細資訊中，使用者可以點擊**餐廳類別**，來查看所有相同類別的餐廳
 ![Where to click the category](./public/image/restaurant_detail_category.png)
