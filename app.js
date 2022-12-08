@@ -24,7 +24,7 @@ app.get('/search', (req, res) => {
     return (restaurant.name + restaurant.category).toLowerCase().includes(keyword.toLowerCase())
   })
   // check if results found
-  restaurants.length ? res.render('index', { restaurants, keyword }) : res.render('error', { keyword })
+  restaurants.length ? res.render('index', { restaurants, keyword }) : res.render('error', { restaurants, keyword })
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
