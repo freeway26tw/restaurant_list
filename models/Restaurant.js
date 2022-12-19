@@ -12,4 +12,4 @@ const restaurantListSchema = new Schema({
   rating: { type: Number, required: true },
   description: { type: String, required: true }
 })
-module.exports = mongoose.model('Restaurant-list', restaurantListSchema)
+module.exports = mongoose.model('Restaurant', restaurantListSchema)

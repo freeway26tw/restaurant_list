@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-const restaurantList = require('./restaurant.json').results
 const mongoose = require('mongoose')
+const Restaurant = require("./models/Restaurant")
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -27,7 +27,10 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => res.render("index", { restaurants }))
+    .catch(err => console.log(err))
 })
 
 app.get('/search', (req, res) => {
