@@ -22,7 +22,15 @@ db.once('open', () => {
 })
 
 // setting template engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+  helpers: {
+    formInput: function (tag, show, type) {
+      return `<label for="${tag}">${show}</label>
+          <input type="${type}" id="${tag}" placeholder="${tag}" name="${tag}"><br>`
+    },
+  }
+}))
 app.set('view engine', 'handlebars')
 
 // setting static files
@@ -51,17 +59,10 @@ app.get('/search', (req, res) => {
         : res.render('error', { restaurants, keyword })
     })
     .catch(error => console.log(error))
-
-  // const restaurants = restaurantList.filter(restaurant => {
-  //   return (restaurant.name + restaurant.category).toLowerCase().includes(keyword.toLowerCase())
-  // })
-  // // check if results found
-  // restaurants.length ? res.render('index', { restaurants, keyword }) : res.render('error', { restaurants, keyword })
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurant_id = req.params.restaurant_id
-
   if (req.params.restaurant_id === 'new') {
     return res.render('new')
   }
