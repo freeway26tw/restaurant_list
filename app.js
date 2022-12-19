@@ -48,15 +48,16 @@ app.get('/search', (req, res) => {
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
+  const restaurant_id = req.params.restaurant_id
 
   if (req.params.restaurant_id === 'new') {
     return res.render('new')
   }
 
-  const restaurant = restaurantList.find(
-    restaurant => restaurant.id.toString() === req.params.restaurant_id
-  )
-  res.render('show', { restaurant })
+  Restaurant.find({ id: restaurant_id })
+    .lean()
+    .then(restaurant => res.render('show', { restaurant: restaurant[0] }))
+    .catch(error => console.log(error))
 })
 
 app.get('/restaurants/explore/:restaurant_category', (req, res) => {
