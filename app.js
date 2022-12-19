@@ -73,6 +73,21 @@ app.post('/restaurants', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/restaurants/:restaurant_id/edit', (req, res) => {
+  const restaurant_id = req.params.restaurant_id
+  Restaurant.find({ id: restaurant_id })
+    .lean()
+    .then(restaurant => res.render('edit', { restaurant: restaurant[0] }))
+    .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:restaurant_id/edit', (req, res) => {
+  const restaurant_id = req.params.restaurant_id
+  return Restaurant.findOneAndUpdate({ id: restaurant_id }, req.body)
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
 })
