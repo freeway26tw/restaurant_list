@@ -31,7 +31,11 @@
             <div class="restaurant-category mb-1">
               <i class="fas fa-utensils pr-2"></i>
               <a href="/restaurants/explore/{{this.category}}">{{this.category}}</a>
-              <a href="/restaurants/{{ this.id }}/edit">Edit</a>
+              <a href="/restaurants/{{this.id}}">Detail</a>
+              <a href="/restaurants/{{this.id}}/edit">Edit</a>
+              <form action="./restaurants/{{this.id}}/delete" method="POST" style="display: inline;">
+                <button type="submit">delete</button>
+              </form>
             </div>
 
             <span class="badge badge-pill badge-danger font-weight-normal">
