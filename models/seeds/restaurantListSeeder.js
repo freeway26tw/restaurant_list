@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const RestaurantList = require('../Restaurant.js')
+const Restaurant = require('../Restaurant.js')
 const restaurant = require('../../restaurant.json').results
 
 if (process.env.NODE_ENV !== 'production') {
@@ -13,5 +13,5 @@ db.on('error', () => {
 })
 db.once('open', () => {
   console.log('mongodb connected!')
-  RestaurantList.create(restaurant)
+  Restaurant.create(restaurant)
 })

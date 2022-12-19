@@ -40,11 +40,23 @@ app.get('/search', (req, res) => {
   // if no keyword, redirect to baseUrl
   if (!keyword) return res.redirect(req.baseUrl + '/')
 
-  const restaurants = restaurantList.filter(restaurant => {
-    return (restaurant.name + restaurant.category).toLowerCase().includes(keyword.toLowerCase())
-  })
-  // check if results found
-  restaurants.length ? res.render('index', { restaurants, keyword }) : res.render('error', { restaurants, keyword })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => {
+      const restaurantFiltered = restaurants.filter(data => {
+        return data.name.toLowerCase().includes(keyword.toLowerCase())
+      })
+      restaurantFiltered.length
+        ? res.render('index', { restaurants: restaurantFiltered, keyword })
+        : res.render('error', { restaurants, keyword })
+    })
+    .catch(error => console.log(error))
+
+  // const restaurants = restaurantList.filter(restaurant => {
+  //   return (restaurant.name + restaurant.category).toLowerCase().includes(keyword.toLowerCase())
+  // })
+  // // check if results found
+  // restaurants.length ? res.render('index', { restaurants, keyword }) : res.render('error', { restaurants, keyword })
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
