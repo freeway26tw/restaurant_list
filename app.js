@@ -61,10 +61,10 @@ app.get('/restaurants/:restaurant_id', (req, res) => {
 })
 
 app.get('/restaurants/explore/:restaurant_category', (req, res) => {
-  const restaurants = restaurantList.filter(restaurant => {
-    return restaurant.category.toString() === req.params.restaurant_category
-  })
-  res.render('index', { restaurants, keyword: req.params.restaurant_category })
+  Restaurant.find({ category: req.params.restaurant_category })
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
 })
 
 app.post('/restaurants', (req, res) => {
