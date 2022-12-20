@@ -48,14 +48,17 @@ app.get('/search', (req, res) => {
   // if no keyword, redirect to baseUrl
   if (!keyword) return res.redirect(req.baseUrl + '/')
 
-  Restaurant.find()
+  Restaurant.find(
+    {
+      $or: [
+        { name: { "$regex": keyword, "$options": "i" } },
+        { category: { "$regex": keyword, "$options": "i" } }
+      ]
+    })
     .lean()
     .then(restaurants => {
-      const restaurantFiltered = restaurants.filter(data => {
-        return (data.name + data.category).toLowerCase().includes(keyword.toLowerCase())
-      })
-      restaurantFiltered.length
-        ? res.render('index', { restaurants: restaurantFiltered, keyword })
+      restaurants.length
+        ? res.render('index', { restaurants, keyword })
         : res.render('error', { restaurants, keyword })
     })
     .catch(error => console.log(error))
