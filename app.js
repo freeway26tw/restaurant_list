@@ -25,10 +25,10 @@ db.once('open', () => {
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
   helpers: {
-    formInput: function (tag, show, type) {
+    formInputNew: function (tag, show, type) {
       return `<label for="${tag}">${show}</label>
           <input type="${type}" id="${tag}" placeholder="${tag}" name="${tag}"><br>`
-    },
+    }
   }
 }))
 app.set('view engine', 'handlebars')
@@ -52,7 +52,7 @@ app.get('/search', (req, res) => {
     .lean()
     .then(restaurants => {
       const restaurantFiltered = restaurants.filter(data => {
-        return data.name.toLowerCase().includes(keyword.toLowerCase())
+        return (data.name + data.category).toLowerCase().includes(keyword.toLowerCase())
       })
       restaurantFiltered.length
         ? res.render('index', { restaurants: restaurantFiltered, keyword })

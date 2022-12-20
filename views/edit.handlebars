@@ -5,26 +5,26 @@
 
         <form action="/restaurants/{{ restaurant.id}}/edit" method="POST">
           <label for="name">Name</label>
-          <input type="text" id="name" placeholder="name" name="name" value={{ restaurant.name }}><br>
+          <input type="text" id="name" placeholder="name" name="name" value="{{ restaurant.name }}"><br>
           <label for="name_en">Name (En)</label>
-          <input type="text" id="name_en" placeholder="name_en" name="name_en" value={{ restaurant.name_en }}><br>
-          <label for="category">Category</label>
-          <input type="text" id="category" placeholder="category" name="category" value={{ restaurant.category }}><br>
-          <label for="image">Image</label>
-          <input type="text" id="image" placeholder="image" name="image" value={{ restaurant.image }}><br>
-          <label for="location">Location</label>
-          <input type="text" id="location" placeholder="location" name="location" value={{ restaurant.location }}><br>
-          <label for="phone">Name</label>
-          <input type="text" id="phone" placeholder="phone" name="phone" value={{ restaurant.phone }}><br>
-          <label for="google_map">Name</label>
-          <input type="text" id="google_map" placeholder="google_map" name="google_map" value={{ restaurant.google_map
-            }}><br>
-          <label for="rating">Rating</label>
-          <input type="text" id="rating" placeholder="rating" name="rating" value={{ restaurant.rating }}><br>
-          <label for="decription">Description</label>
-          <input type="text" id="description" placeholder="description" name="description" value={{
-            restaurant.description }}><br>
-          <button type="submit">Edit</button>
+          <input type="text" id="name_en" placeholder="name_en" name="name_en" value="{{ restaurant.name_en }}"><br>
+          <label for=" category">Category</label>
+          <input type="text" id="category" placeholder="category" name="category" value="{{ restaurant.category }}"><br>
+          <label for=" image">Image</label>
+          <input type="text" id="image" placeholder="image" name="image" value="{{ restaurant.image }}"><br>
+          <label for=" location">Location</label>
+          <input type="text" id="location" placeholder="location" name="location" value="{{ restaurant.location }}"><br>
+          <label for=" phone">Phone</label>
+          <input type="text" id="phone" placeholder="phone" name="phone" value="{{ restaurant.phone }}"><br>
+          <label for=" google_map">Google Map</label>
+          <input type="text" id="google_map" placeholder="google_map" name="google_map" value="{{ restaurant.google_map
+            }}"><br>
+          <label for=" rating">Rating</label>
+          <input type="text" id="rating" placeholder="rating" name="rating" value="{{ restaurant.rating }}"><br>
+          <label for=" decription">Description</label>
+          <input type="text" id="description" placeholder="description" name="description" value="{{
+            restaurant.description }}"><br>
+          <button type=" submit">Edit</button>
         </form>
 
       </div>

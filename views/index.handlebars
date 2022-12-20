@@ -6,7 +6,12 @@
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="{{keyword}}" aria-describedby="search-button">
+            value="{{keyword}}" list="searchWord" aria-describedby="search-button">
+          <datalist id="searchWord">
+            {{#each restaurants}}
+            <option value="{{this.name}}">{{this.name}}</option>
+            {{/each}}
+          </datalist>
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
