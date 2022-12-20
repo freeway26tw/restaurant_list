@@ -9,7 +9,15 @@
           <label for="name_en">Name (En)</label>
           <input type="text" id="name_en" placeholder="name_en" name="name_en" value="{{ restaurant.name_en }}"><br>
           <label for=" category">Category</label>
-          <input type="text" id="category" placeholder="category" name="category" value="{{ restaurant.category }}"><br>
+          <select id="category" name="category">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="中東料理">中東料理</option>
+            <option value="日本料理">日本料理</option>
+            <option value="義式餐廳">義式餐廳</option>
+            <option value="美式">美式</option>
+            <option value="酒吧">酒吧</option>
+            <option value="咖啡">咖啡</option>
+          </select><br>
           <label for=" image">Image</label>
           <input type="text" id="image" placeholder="image" name="image" value="{{ restaurant.image }}"><br>
           <label for=" location">Location</label>
@@ -20,10 +28,12 @@
           <input type="text" id="google_map" placeholder="google_map" name="google_map" value="{{ restaurant.google_map
             }}"><br>
           <label for=" rating">Rating</label>
-          <input type="text" id="rating" placeholder="rating" name="rating" value="{{ restaurant.rating }}"><br>
+          <input type="float" id="rating" placeholder="rating" name="rating" min="0" max="5"
+            value="{{ restaurant.rating }}"><br>
           <label for=" decription">Description</label>
-          <input type="text" id="description" placeholder="description" name="description" value="{{
-            restaurant.description }}"><br>
+          <textarea id="description" name="description" rows="4" cols="50">{{
+          restaurant.description }}
+          </textarea>
           <button type=" submit">Edit</button>
         </form>
 

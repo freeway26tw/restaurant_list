@@ -7,13 +7,25 @@
           {{{formInputNew 'id' 'ID' 'text'}}}
           {{{formInputNew 'name' 'Name' 'text'}}}
           {{{formInputNew 'name_en' 'Name(en)''text'}}}
-          {{{formInputNew 'category' 'Category''text'}}}
+          <label for=" category">Category</label>
+          <select id="category" name="category">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="中東料理">中東料理</option>
+            <option value="日本料理">日本料理</option>
+            <option value="義式餐廳">義式餐廳</option>
+            <option value="美式">美式</option>
+            <option value="酒吧">酒吧</option>
+            <option value="咖啡">咖啡</option>
+          </select><br>
           {{{formInputNew 'image' 'Image''text'}}}
           {{{formInputNew 'location' 'Location''text'}}}
           {{{formInputNew 'phone' 'Phone''text'}}}
           {{{formInputNew 'google_map' 'Google Map''text'}}}
-          {{{formInputNew 'rating' 'Rating''number'}}}
-          {{{formInputNew 'description' 'Description''text'}}}
+          {{{formInputNew 'rating' 'Rating''float'}}}
+          <label for=" decription">Description</label>
+          <textarea id="description" name="description" rows="4" cols="50">{{
+                    restaurant.description }}
+                    </textarea>
           <button type="submit">Create</button>
         </form>
 
