@@ -1,6 +1,6 @@
 # 我的餐廳清單
 
-![Index page about Restaurant List](./public/image/snapshot.png)
+![Index page about Restaurant List](./public/image/snapshot_CRUD_basic.png)
 
 ## 介紹
 
@@ -27,6 +27,10 @@
 在餐廳詳細資訊中，使用者可以點擊**餐廳類別**，來查看所有相同類別的餐廳
 ![Where to click the category](./public/image/restaurant_detail_category.png)
 
+針對餐廳資訊，使用者可以:
+* 新增餐廳
+* 編輯餐廳
+* 刪除餐廳
 
 ## 開始使用
 
@@ -77,3 +81,5 @@
 - Express-Handlebars 3.0.0
 - Bootstrap 5.1.3
 - Font-awesome 5.8.1
+- Body-Parser: 1.20.1
+- Mongoose: 5.9.7
