@@ -92,9 +92,9 @@ app.post('/restaurants', (req, res) => {
 
 app.get('/restaurants/:restaurant_id/edit', (req, res) => {
   const restaurant_id = req.params.restaurant_id
-  Restaurant.find({ id: restaurant_id })
+  Restaurant.findOne({ id: restaurant_id })
     .lean()
-    .then(restaurant => res.render('edit', { restaurant: restaurant[0] }))
+    .then(restaurant => res.render('edit', { restaurant: restaurant }))
     .catch(error => console.log(error))
 })
 
