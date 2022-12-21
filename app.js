@@ -94,7 +94,7 @@ app.get('/restaurants/:restaurant_id/edit', (req, res) => {
   const restaurant_id = req.params.restaurant_id
   Restaurant.findOne({ id: restaurant_id })
     .lean()
-    .then(restaurant => res.render('edit', { restaurant: restaurant }))
+    .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
 
