@@ -64,15 +64,16 @@ app.get('/search', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/restaurants/new', (req, res) => {
+  res.render('new')
+})
+
 app.get('/restaurants/:restaurant_id', (req, res) => {
   const restaurant_id = req.params.restaurant_id
-  if (req.params.restaurant_id === 'new') {
-    return res.render('new')
-  }
 
-  Restaurant.find({ id: restaurant_id })
+  Restaurant.findOne({ id: restaurant_id })
     .lean()
-    .then(restaurant => res.render('show', { restaurant: restaurant[0] }))
+    .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
 
