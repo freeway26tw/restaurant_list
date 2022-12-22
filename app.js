@@ -4,8 +4,9 @@ const port = 3000
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const Restaurant = require("./models/Restaurant")
+const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: true }))
+
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -35,6 +36,10 @@ app.set('view engine', 'handlebars')
 
 // setting static files
 app.use(express.static('public'))
+
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(methodOverride('_method'))
 
 app.get('/', (req, res) => {
   Restaurant.find()
@@ -98,14 +103,14 @@ app.get('/restaurants/:restaurant_id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:restaurant_id/edit', (req, res) => {
+app.put('/restaurants/:restaurant_id', (req, res) => {
   const restaurant_id = req.params.restaurant_id
   return Restaurant.findOneAndUpdate({ id: restaurant_id }, req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:restaurant_id/delete', (req, res) => {
+app.delete('/restaurants/:restaurant_id', (req, res) => {
   const restaurant_id = req.params.restaurant_id
   return Restaurant.findOneAndDelete({ id: restaurant_id })
     .then(() => res.redirect('/'))

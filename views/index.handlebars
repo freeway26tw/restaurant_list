@@ -39,7 +39,7 @@
               <a href="/restaurants/{{this.id}}">Detail</a>
               <a href="/restaurants/{{this.id}}/edit">Edit</a>
               <form onClick="return confirm('Are you sure you want to delete this item?')"
-                action=" ./restaurants/{{this.id}}/delete" method="POST" style="display: inline;">
+                action=" ./restaurants/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
                 <button type="submit">delete</button>
               </form>
             </div>
