@@ -22,7 +22,7 @@
 * 圖片
 
 使用者可以透過**下拉選單**來排序搜尋餐廳清單
-![Dropdown list in search bar](./public/image/dropdown_sort.png.png)
+![Dropdown list in search bar](./public/image/dropdown_sort.png)
 
 使用者可以透過搜尋**餐廳名稱**或是**餐廳類別**來找到特定的餐廳，除了手動搜尋外，也在搜尋框中，可以使用下拉式選單選取餐廳
 ![Dropdown list in search bar](./public/image/search_dropdown_list.png)
