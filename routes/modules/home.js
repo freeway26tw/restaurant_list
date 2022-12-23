@@ -4,10 +4,50 @@ const router = express.Router()
 const Restaurant = require('../../models/Restaurant.js')
 
 router.get('/', (req, res) => {
-  Restaurant.find()
+  const keyword = req.query.keyword || ''
+  let sort = req.query.sort
+  let sortBy = {}
+
+  // 利用 object assign的方式來放sortBy的資料
+  switch (sort) {
+    case 'default':
+      sortBy = Object.assign(sortBy, { _id: 1 })
+      break
+    case 'AtoZ':
+      sortBy = Object.assign(sortBy, { name: 1 })
+      break
+    case 'ZtoA':
+      sortBy = Object.assign(sortBy, { name: -1 })
+      break
+    case 'category':
+      sortBy = Object.assign(sortBy, { category: 1 })
+      break
+    case 'location':
+      sortBy = Object.assign(sortBy, { location: 1 })
+      break
+  }
+
+  // Computed property names
+  const sortSelected = { [sort]: true }
+
+  Restaurant.find(
+    {
+      $or: [
+        { name: { "$regex": keyword, "$options": "i" } },
+        { category: { "$regex": keyword, "$options": "i" } }
+      ]
+    })
     .lean()
-    .then(restaurants => res.render("index", { restaurants }))
-    .catch(err => console.log(err))
+    .sort(sortBy)
+    .then(restaurants => {
+      restaurants.length
+        ? res.render('index', { restaurants, keyword, sortSelected })
+        : res.render('error', { restaurants, keyword })
+    })
+    .catch(error => {
+      console.log(error)
+      res.render('error', { err: err.message })
+    })
 })
 
 module.exports = router

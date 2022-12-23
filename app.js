@@ -12,7 +12,6 @@ const app = express()
 const port = 3000
 app.use(bodyParser.urlencoded({ extended: true }))
 
-
 // setting template engine
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
@@ -21,14 +20,8 @@ app.engine('handlebars', exphbs({
       return `<label for="${tag}">${show}</label>
           <input type="${type}" id="${tag}" placeholder="${tag}" name="${tag}"><br>`
     },
-    sort: () => {
-      return `<select onchange="window.location = '/?Order=' + this.options[this.selectedIndex].value;">
-        <option value="">Select...</option>
-        <option value="AtoZ">A->Z</option>
-        <option value="ZtoA">Z->A</option>
-        <option value="category">類別</option>
-        <option value="region">Region</option>
-      </select>`
+    selected: (sortSelected) => {
+      if (sortSelected) return "selected"
     }
   }
 }))

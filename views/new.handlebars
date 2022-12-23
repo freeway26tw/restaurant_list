@@ -4,7 +4,8 @@
       <div class="row row-cols-sm-3">
 
         <form action="/restaurants" method="POST">
-          {{{formInputNew 'id' 'ID' 'text'}}}
+          <label for="id">ID</label>
+          <input type="TEXT" id="id" placeholder="id" name="id" disabled="disabled" value="{{dbCount}}"><br>
           {{{formInputNew 'name' 'Name' 'text'}}}
           {{{formInputNew 'name_en' 'Name(en)''text'}}}
           <label for=" category">Category</label>
