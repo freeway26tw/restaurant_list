@@ -4,9 +4,12 @@ const router = express.Router()
 const Restaurant = require('../../models/Restaurant.js')
 
 router.get('/', (req, res) => {
-  const keyword = req.query.keyword.trim()
   // if no keyword, redirect to baseUrl
-  if (!keyword) return res.redirect(req.baseUrl + '/')
+  if (!req.query) return res.redirect(req.baseUrl + '/')
+  const keyword = req.query.keyword.trim()
+  const originalurl = req.originalUrl
+  console.log(originalurl)
+
   Restaurant.find(
     {
       $or: [
@@ -17,10 +20,15 @@ router.get('/', (req, res) => {
     .lean()
     .then(restaurants => {
       restaurants.length
-        ? res.render('index', { restaurants, keyword })
-        : res.render('error', { restaurants, keyword })
+        ? res.render('index', { restaurants, keyword, originalurl })
+        : res.render('error', { restaurants, keyword, originalurl })
     })
     .catch(error => console.log(error))
+})
+
+router.get('/sort', (req, res) => {
+  console.log(this.restaurants)
+  res.render('index', this.restaurants)
 })
 
 module.exports = router
