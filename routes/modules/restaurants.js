@@ -19,15 +19,7 @@ router.get('/:restaurant_id', (req, res) => {
     })
 })
 
-router.get('/explore/:restaurant_category', (req, res) => {
-  Restaurant.find({ category: req.params.restaurant_category })
-    .lean()
-    .then(restaurants => res.render('index', { restaurants }))
-    .catch(error => {
-      console.log(error)
-      res.render('error', { err: err.message })
-    })
-})
+
 
 router.post('/', (req, res) => {
   return Restaurant.create(req.body)
