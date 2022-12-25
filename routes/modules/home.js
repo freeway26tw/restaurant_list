@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
     })
     .catch(error => {
       console.log(error)
-      res.render('error', { err: err.message })
+      res.render('error', { error })
     })
 })
 
@@ -56,7 +56,7 @@ router.get('/explore/:restaurant_category', (req, res) => {
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => {
       console.log(error)
-      res.render('error', { err: err.message })
+      res.render('error', { error })
     })
 })
 

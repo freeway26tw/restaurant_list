@@ -1,42 +1,41 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
-      <div class="row row-cols-sm-3">
-
-        <form action="/restaurants/{{ restaurant.id}}?_method=PUT" method="POST">
-          <label for="name">Name</label>
-          <input type="text" id="name" placeholder="name" name="name" value="{{ restaurant.name }}"><br>
-          <label for="name_en">Name (En)</label>
+      <div>(*)為必填欄位</div>
+      <div class="row row-cols-sm-3 mt-3">
+        <form action="/restaurants/{{ restaurant._id}}?_method=PUT" method="POST">
+          <label for="name">Name(*)</label>
+          <input type="text" id="name" placeholder="name" name="name" value="{{ restaurant.name }}" required><br>
+          <label for="name_en">Name in English</label>
           <input type="text" id="name_en" placeholder="name_en" name="name_en" value="{{ restaurant.name_en }}"><br>
-          <label for=" category">Category</label>
-          <select id="category" name="category">
-            <option value="" selected disabled hidden>Choose here</option>
-            <option value="中東料理">中東料理</option>
-            <option value="日本料理">日本料理</option>
-            <option value="義式餐廳">義式餐廳</option>
-            <option value="美式">美式</option>
-            <option value="酒吧">酒吧</option>
-            <option value="咖啡">咖啡</option>
+          <label for="category">Category(*)</label>
+          <select id="category" name="category" required>
+            <option {{#ifCond restaurant.category '===' '中東料理' }}selected{{/ifCond}} value="中東料理">中東料理</option>
+            <option {{#ifCond restaurant.category '===' '日本料理' }}selected{{/ifCond}} value="日本料理">日本料理</option>
+            <option {{#ifCond restaurant.category '===' '義式餐廳' }}selected{{/ifCond}} value="義式餐廳">義式餐廳</option>
+            <option {{#ifCond restaurant.category '===' '美式' }}selected{{/ifCond}} value="美式">美式</option>
+            <option {{#ifCond restaurant.category '===' '酒吧' }}selected{{/ifCond}} value="酒吧">酒吧</option>
+            <option {{#ifCond restaurant.category '===' '咖啡' }}selected{{/ifCond}} value="咖啡">咖啡</option>
           </select><br>
-          <label for=" image">Image</label>
-          <input type="text" id="image" placeholder="image" name="image" value="{{ restaurant.image }}"><br>
-          <label for=" location">Location</label>
-          <input type="text" id="location" placeholder="location" name="location" value="{{ restaurant.location }}"><br>
-          <label for=" phone">Phone</label>
-          <input type="text" id="phone" placeholder="phone" name="phone" value="{{ restaurant.phone }}"><br>
-          <label for=" google_map">Google Map</label>
-          <input type="text" id="google_map" placeholder="google_map" name="google_map" value="{{ restaurant.google_map
-            }}"><br>
-          <label for=" rating">Rating</label>
-          <input type="float" id="rating" placeholder="rating" name="rating" min="0" max="5"
-            value="{{ restaurant.rating }}"><br>
-          <label for=" decription">Description</label>
-          <textarea id="description" name="description" rows="4" cols="50">{{
-          restaurant.description }}
-          </textarea>
-          <button type=" submit">Edit</button>
+          <label for="image">Image(*)</label>
+          <input type="url" id="image" placeholder="Image URL" name="image" value="{{ restaurant.image }}" required><br>
+          <label for="location">Location(*)</label>
+          <input type="text" id="location" placeholder="location" name="location" value="{{ restaurant.location }}"
+            required><br>
+          <label for="phone">Phone(*)</label>
+          <input type="tel" id="phone" placeholder="Ex: 0900-000-000" name="phone" value="{{ restaurant.phone }}"
+            required><br>
+          <label for="google_map">Google Map(*)</label>
+          <input type="url" id="google_map" placeholder="google_map" name="google_map" value="{{ restaurant.google_map
+            }}" required><br>
+          <label for=" rating">Rating(*)</label>
+          <input type="float" id="rating" placeholder="請輸入0~5之間的數值" name="rating" min="0" max="5"
+            value="{{ restaurant.rating }}" required><br>
+          <label for=" decription">Description(*)</label>
+          <textarea id="description" name="description" rows="4" cols="50"
+            required>{{restaurant.description}}</textarea>
+          <button type="submit">Edit</button>
         </form>
-
       </div>
     </div>
   </div>

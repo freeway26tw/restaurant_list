@@ -10,12 +10,12 @@ router.get('/new', (req, res) => {
 router.get('/:restaurant_id', (req, res) => {
   const restaurant_id = req.params.restaurant_id
 
-  Restaurant.findOne({ id: restaurant_id })
+  Restaurant.findById(restaurant_id)
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => {
       console.log(error)
-      res.render('error', { err: err.message })
+      res.render('error', { error })
     })
 })
 
@@ -26,38 +26,39 @@ router.post('/', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => {
       console.log(error)
-      res.render('error', { err: err.message })
+      res.render('error', { error })
     })
 })
 
 router.get('/:restaurant_id/edit', (req, res) => {
   const restaurant_id = req.params.restaurant_id
-  Restaurant.findOne({ id: restaurant_id })
+  Restaurant.findById(restaurant_id)
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => {
       console.log(error)
-      res.render('error', { err: err.message })
+      res.render('error', { error })
     })
 })
 
 router.put('/:restaurant_id', (req, res) => {
   const restaurant_id = req.params.restaurant_id
-  return Restaurant.findOneAndUpdate({ id: restaurant_id }, req.body)
+  console.log(restaurant_id)
+  return Restaurant.findByIdAndUpdate({ _id: restaurant_id }, req.body)
     .then(() => res.redirect('/'))
     .catch(error => {
       console.log(error)
-      res.render('error', { err: err.message })
+      res.render('error', { error })
     })
 })
 
 router.delete('/:restaurant_id', (req, res) => {
   const restaurant_id = req.params.restaurant_id
-  return Restaurant.findOneAndDelete({ id: restaurant_id })
+  return Restaurant.findByIdAndDelete(restaurant_id)
     .then(() => res.redirect('/'))
     .catch(error => {
       console.log(error)
-      res.render('error', { err: err.message })
+      res.render('error', { error })
     })
 })
 
