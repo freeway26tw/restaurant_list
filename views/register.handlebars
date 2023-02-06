@@ -5,20 +5,22 @@
       <form action="/users/register" method="POST">
         <div class="mb-3">
           <label for="name" class="mb-2">Name</label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name">
+          <input type="text" id="name" name="name" class="form-control" placeholder="Enter Name" value="{{ name }}">
         </div>
         <div class="mb-3">
           <label for="email" class="mb-2">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
+            value="{{ email }}">
         </div>
         <div class="mb-3">
           <label for="password" class="mb-2">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"
+            value="{{ password }}">
         </div>
         <div class="mb-3">
           <label for="confirmPassword" class="mb-2">Confirm Password</label>
           <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
-            placeholder="Confirm Password">
+            placeholder="Confirm Password" value="{{ confirmPassword }}">
         </div>
         <button type="submit" class="btn btn-primary btn-block">Register</button>
       </form>
