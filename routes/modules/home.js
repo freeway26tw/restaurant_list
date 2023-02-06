@@ -5,6 +5,7 @@ const Restaurant = require('../../models/Restaurant.js')
 
 router.get('/', (req, res) => {
   const keyword = req.query.keyword || ''
+  const userId = req.user._id
   let sort = req.query.sort
   let sortBy = {}
 
@@ -32,6 +33,7 @@ router.get('/', (req, res) => {
 
   Restaurant.find(
     {
+      userId,
       $or: [
         { name: { "$regex": keyword, "$options": "i" } },
         { category: { "$regex": keyword, "$options": "i" } }
