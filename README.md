@@ -93,7 +93,6 @@
 ## 開發工具
 
 - bcryptjs: 2.4.3
-- bcryptjs: 2.4.3
 - body-parser: 1.20.1
 - connect-flash: 0.1.1
 - express: 4.16.4
