@@ -8,6 +8,11 @@
 
 ### 功能
 
+使用者需要先登入，才能使用餐廳清單的功能
+* 自行創建帳號後登入
+* Facebook登入
+* Google登入
+
 使用者可以在首頁看到所有餐廳與它們的簡單資料：
 * 餐廳照片
 * 餐廳名稱
@@ -54,6 +59,7 @@
    但此訊息不影響此專案的運作，因此可先忽略
 
 4. 新增.env檔案，存放 MONGODB_URI=mongoDB+srv://[使用者帳號:使用者密碼]@[資料庫伺服器位置]/[資料庫名稱]
+   **詳細填寫資料，請參照.env.example**
 
 5. 使用種子資料:
    ```bash
@@ -86,10 +92,17 @@
 
 ## 開發工具
 
-- Node.js 14.16.0
-- Express 4.16.4
-- Express-Handlebars 3.0.0
-- Bootstrap 5.1.3
-- Font-awesome 5.8.1
-- Body-Parser: 1.20.1
-- Mongoose: 5.9.7
+- bcryptjs: 2.4.3
+- bcryptjs: 2.4.3
+- body-parser: 1.20.1
+- connect-flash: 0.1.1
+- express: 4.16.4
+- express-handlebars: 3.0.0
+- express-session: 1.17.1
+- express-validator: 6.14.3
+- method-override: 3.0.0
+- mongoose: 5.9.7
+- passport: 0.4.1
+- passport-facebook: 3.0.0
+- passport-google-oauth20: 2.0.0
+- passport-local: 1.0.0
