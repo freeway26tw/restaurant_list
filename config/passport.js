@@ -23,55 +23,41 @@ module.exports = app => {
       .catch(error => done(error, false))
   }))
 
+  const passportCBFunction = function (type) {
+    return function(accessToken, refreshToken, profile, done) {
+      const { name, email } = profile._json
+      User.findOne({ email, type })
+        .then(user => {
+          if (user) return done(null, user)
+          const randomPassword = Math.random().toString(36).slice(-8)
+          bcrypt
+            .genSalt(10)
+            .then(salt => bcrypt.hash(randomPassword, salt))
+            .then(hash => User.create({
+              name,
+              email,
+              password: hash,
+              type
+            }))
+            .then(user => done(null, user))
+            .catch(error => done(error, false))
+        })
+    }
+  }
+
   passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_ID,
     clientSecret: process.env.FACEBOOK_SECRET,
     callbackURL: process.env.FACEBOOK_CALLBACK,
     profileFields: ['email', 'displayName']
-  }, (accessToken, refreshToken, profile, done) => {
-    const { name, email } = profile._json
-    User.findOne({ email, type: 'facebook' })
-      .then(user => {
-        if (user) return done(null, user)
-        const randomPassword = Math.random().toString(36).slice(-8)
-        bcrypt
-          .genSalt(10)
-          .then(salt => bcrypt.hash(randomPassword, salt))
-          .then(hash => User.create({
-            name,
-            email,
-            password: hash,
-            type: 'facebook'
-          }))
-          .then(user => done(null, user))
-          .catch(error => done(error, false))
-      })
-  }))
+  }, passportCBFunction('facebook')))
 
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: process.env.GOOGLE_CALLBACK,
     profileFields: ['email', 'displayName']
-  }, (accessToken, refreshToken, profile, done) => {
-    const { name, email } = profile._json
-    User.findOne({ email, type: 'google' })
-      .then(user => {
-        if (user) return done(null, user)
-        const randomPassword = Math.random().toString(36).slice(-8)
-        bcrypt
-          .genSalt(10)
-          .then(salt => bcrypt.hash(randomPassword, salt))
-          .then(hash => User.create({
-            name,
-            email,
-            password: hash,
-            type: 'google'
-          }))
-          .then(user => done(null, user))
-          .catch(error => done(error, false))
-      })
-  }))
+  }, passportCBFunction('google')))
 
   passport.serializeUser((user, done) => {
     done(null, user.id)
