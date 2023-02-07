@@ -2,13 +2,13 @@ const passport = require('passport')
 const bcrypt = require('bcryptjs')
 const LocalStrategy = require('passport-local').Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
-const GoogleStrategy = require('passport-google-oauth20')
+const GoogleStrategy = require('passport-google-oauth20').Strategy
 const User = require('../models/user')
 module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
   passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true, }, (req, email, password, done) => {
-    User.findOne({ email })
+    User.findOne({ email, type: 'manual' })
       .then(user => {
         if (!user) {
           return done(null, false, { message: 'That email is not registered!' })
@@ -30,7 +30,7 @@ module.exports = app => {
     profileFields: ['email', 'displayName']
   }, (accessToken, refreshToken, profile, done) => {
     const { name, email } = profile._json
-    User.findOne({ email })
+    User.findOne({ email, type: 'facebook' })
       .then(user => {
         if (user) return done(null, user)
         const randomPassword = Math.random().toString(36).slice(-8)
@@ -40,7 +40,8 @@ module.exports = app => {
           .then(hash => User.create({
             name,
             email,
-            password: hash
+            password: hash,
+            type: 'facebook'
           }))
           .then(user => done(null, user))
           .catch(error => done(error, false))
@@ -54,7 +55,7 @@ module.exports = app => {
     profileFields: ['email', 'displayName']
   }, (accessToken, refreshToken, profile, done) => {
     const { name, email } = profile._json
-    User.findOne({ email })
+    User.findOne({ email, type: 'google' })
       .then(user => {
         if (user) return done(null, user)
         const randomPassword = Math.random().toString(36).slice(-8)
@@ -64,7 +65,8 @@ module.exports = app => {
           .then(hash => User.create({
             name,
             email,
-            password: hash
+            password: hash,
+            type: 'google'
           }))
           .then(user => done(null, user))
           .catch(error => done(error, false))

@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const Restaurant = require('../Restaurant.js')
 const User = require('../user')
-const restaurant = require('../../restaurant.json').results
+const restaurant = require('./restaurant.json').results
 const db = require('../../config/mongoose')
 
 const SEED_USERS = [
@@ -30,7 +30,8 @@ db.once('open', () => {
         User.create({
           name: user.name,
           email: user.email,
-          password: hash
+          password: hash,
+          type: 'manual'
         }))
       .then(userCreated => {
         const restaurantFiltered = restaurant.filter(item => user.restaurant.includes(item.id))

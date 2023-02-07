@@ -18,7 +18,7 @@ router.get('/register', (req, res) => {
 })
 router.post('/register', [
   check('email').trim().notEmpty().withMessage('Please enter your email').isEmail().withMessage('Please enter valid email'),
-  check('password').trim().isLength({min: 8}).withMessage('Password less than 8 characters').isString().withMessage('Please enter valid password'),
+  check('password').trim().isLength({ min: 8 }).withMessage('Password less than 8 characters').isString().withMessage('Please enter valid password'),
   check('confirmPassword').custom((value, { req }) => {
     if (value !== req.body.password) {
       throw new Error('Password and confirm password are not match!')
@@ -29,7 +29,7 @@ router.post('/register', [
   (req, res) => {
     const { name, email, password, confirmPassword } = req.body
     const errors = validationResult(req)
-    if(!errors.isEmpty()) {
+    if (!errors.isEmpty()) {
       return res.status(422).render('register', {
         errorMessages: errors.array(),
         name,
@@ -38,7 +38,7 @@ router.post('/register', [
         confirmPassword
       })
     }
-    User.findOne({ email }).then(user => {
+    User.findOne({ email, type: 'manual' }).then(user => {
       if (user) {
         errors.push({ message: 'This email had been registered' })
         res.render('register', {
@@ -55,7 +55,8 @@ router.post('/register', [
         .then(hash => User.create({
           name,
           email,
-          password: hash
+          password: hash,
+          type: 'manual'
         }))
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))
