@@ -40,6 +40,11 @@ header {
   font-size: 0.8rem;
 }
 
+form i {
+  margin-left: -30px;
+  cursor: pointer;
+}
+
 .btn-major {
   background-color: #9b4b4b;
   color: white;

@@ -10,8 +10,12 @@
         </div>
         <div class="mb-3">
           <label for="password" class="mb-2">Password</label>
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+          <div class="input-group"></div>
+          <input type="password" id="password" name="password" class="form-control d-inline"
+            placeholder="Enter Password">
+          <i class="bi bi-eye-slash" id="togglePassword"></i>
         </div>
+
         <button type="submit" class="btn btn-primary btn-block">Login</button>
         <a href="/auth/facebook" class="btn btn-info btn-block">Facebook Login</a>
       </form>

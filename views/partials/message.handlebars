@@ -12,15 +12,15 @@
   </button>
 </div>
 {{/if}}
-{{#if errors}}
-{{#each errors}}
+
+{{#each errorMessages}}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  {{ this.message }}
+  {{this.msg}}
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
   </button>
 </div>
 {{/each}}
-{{/if}}
+
 {{#if login_error}}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   {{login_error}}
